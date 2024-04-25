@@ -1,0 +1,78 @@
+<?php
+
+// A. Product class with properties and methods
+class Product {
+    public $product_id;
+    public $name;
+    public $price;
+    public $unit;
+    
+    public function __construct($product_id, $name, $price, $unit) {
+        $this->product_id = $product_id;
+        $this->name = $name;
+        $this->price = $price;
+        $this->unit = $unit;
+    }
+    
+    public function display_info() {
+        echo "Product ID: $this->product_id\n";
+        echo "Name: $this->name\n";
+        echo "Price: $this->price\n";
+        echo "Unit: $this->unit\n";
+    }
+    
+    public function update_price($new_price) {
+        $this->price = $new_price;
+    }
+}
+
+// C. Child classes: Book and Electronic
+class Book extends Product {
+    public $author;
+    public $isbn;
+    public $publisher;
+    
+    public function __construct($product_id, $name, $price, $unit, $author, $isbn, $publisher) {
+        parent::__construct($product_id, $name, $price, $unit);
+        $this->author = $author;
+        $this->isbn = $isbn;
+        $this->publisher = $publisher;
+    }
+    
+    public function display_info() {
+        parent::display_info();
+        echo "Author: $this->author\n";
+        echo "ISBN: $this->isbn\n";
+        echo "Publisher: $this->publisher\n";
+    }
+}
+
+class Electronic extends Product {
+    public $manufacturer;
+    
+    public function __construct($product_id, $name, $price, $unit, $manufacturer) {
+        parent::__construct($product_id, $name, $price, $unit);
+        $this->manufacturer = $manufacturer;
+    }
+    
+    public function display_info() {
+        parent::display_info();
+        echo "Manufacturer: $this->manufacturer\n";
+    }
+}
+
+// E. Instantiate objects
+$book = new Book("B00026", "PHP PROGRAMMING", 500.09, "USD", "CHARLY", "123-012345678910", "TECHNOS");
+$electronic = new Electronic("E00026", "Laptop", 1500.99, "USD", "Acer");
+
+// F. Modify prices
+$book->update_price(500.09);
+$electronic->update_price(1500.99);
+
+// G. Display product information
+echo "Book Information:\n";
+$book->display_info();
+echo "\nElectronic Information:\n";
+$electronic->display_info();
+
+?>
